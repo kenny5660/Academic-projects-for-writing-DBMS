@@ -42,7 +42,7 @@ namespace IntegrationTests
             {
                 _client.Kill();
                 _client.Close();
-            }finally
+            }catch(Exception eex)
             {
 
             }

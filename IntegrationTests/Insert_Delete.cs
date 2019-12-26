@@ -35,7 +35,7 @@ namespace IntegrationTests
             SendSQLQuery(cl1, $"INSERT INTO UnitMeasure (Name, UnitMeasureCode, ModifiedDate) VALUES ('FT2', 'Square Feet ', 20080923), ('Y', 'Yards', '20080923'), ('Y3', 'Cubic Yards', '20080923');", expected);
             SendSQLQuery(cl1, $"INSERT INTO UnitMeasure (UnitMeasureCode, Name, ModifiedDate) VALUES ('Square Feet ', 'FT2', '20080923'), ('Yards', 'Y', '20080923'), ('Cubic Yards', 'Y3', '20080923');", expected);
             SendSQLQuery(cl1, $"INSERT INTO UnitMeasure (UnitMeasureCode, Name, ModifiedDate) VALUES ('Square Feet ', 'FT2', '20080923'), ('Yards', 'Y', '20080923'), ('Cubic Yards', 'Y3', '20080923');", expected);
-            
+
             SendSQLQuery(cl1, $"INSERT INTO UnitMeasure (Name, UnitMeasureCode, ModifiedDate) VALUES ('FT2', 'Square Feet ', 2+2*10), ('Y', 'Yards', (2+2)*10), ('Y3', 'Cubic Yards', 22+2);", expected);
             SendSQLQuery(cl1, $"INSERT INTO UnitMeasure (Name, UnitMeasureCode, ModifiedDate) VALUES ('FT2', 'Square Feet ', 12), ('Y', 'Yards', 11), ('Y3', 'Cubic Yards', 22/0);", expected);
             SendSQLQuery(cl1, $"INSERT INTO UnitMeasure(Name, UnitMeasureCode, ModifiedDate) VALUES('FT2', 'Square Feet ', 55), ('Y', 'Yards', 55), ('Y3', 'Cubic Yards', 55); ", expected);
@@ -53,13 +53,25 @@ namespace IntegrationTests
             SendSQLQuery(cl1, $"SELECT Name FROM UnitMeasure WHERE ModifiedDate < 22", expected);
             SendSQLQuery(cl1, $"SELECT Name FROM UnitMeasure WHERE ModifiedDate > 22", expected);
             SendSQLQuery(cl1, $"SELECT UnitMeasure.Name, UnitMeasure.ModifiedDate FROM (UnitMeasure INNER JOIN UnitMeasure2 ON UnitMeasure.name = UnitMeasure2.name) WHERE ModifiedDate = 22", expected);
-            
-            
+
+
             /*
             SendSQLQuery(cl1, $"INSERT INTO UnitMeasure (UnitMeasureCode, Name, ModifiedDate) VALUES ('Square Feet ', 'FT2', '20080923'), ('Yards', 'Y', '20080923'), ('Cubic Yards', 'Y3', '20080923');;", expected);
             SendSQLQuery(cl1, $"INSERT INTO UnitMeasure (UnitMeasureCode, Name, ModifiedDate) VALUES ('Square Feet ', 'FT2', '20080923'), ('Yards', 'Y', '20080923'), ('Cubic Yards', 'Y3', '20080923');;", expected);
             SendSQLQuery(cl1, $"INSERT INTO UnitMeasure (UnitMeasureCode, Name, ModifiedDate) VALUES ('Square Feet ', 'FT2', '20080923'), ('Yards', 'Y', '20080923'), ('Cubic Yards', 'Y3', '20080923');;", expected);
             */
+
+        }
+
+        [TestMethod]
+        public void TimeTest ()
+        {
+            DelFiles();
+            var _core = new DataBase(20, new DataBaseEngineMain(_testPath), new TransactionScheduler());
+            var expected = GetTestData();
+            var cl1 = new TestClient("cl1", _core);
+            cl1.SendQuery($"CREATE TABLE UnitMeasure (N CHAR(1),C CHAR(5),I INT);");
+            SendSQLQuery(cl1, $"CREATE TABLE UnitMeasure (N CHAR(1),C CHAR(5),I INT);", expected);
 
         }
     }

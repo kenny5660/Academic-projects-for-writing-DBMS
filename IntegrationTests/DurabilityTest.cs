@@ -154,6 +154,7 @@ namespace IntegrationTests
             //s1.Kill();
             System.Threading.Thread.Sleep(100);
             t.Wait();
+            s1.Kill();
             var s2 = new TestApServer("cl2", _core);
             var cl2 = new TestClient("cl1", _core);
 
@@ -189,10 +190,12 @@ namespace IntegrationTests
            // s1.Kill();
             System.Threading.Thread.Sleep(100);
             t.Wait();
+            s1.Kill();
             var s2 = new TestApServer("cl2", _core);
             var cl2 = new TestClient("cl1", _core);
 
             SendSQLQuery(cl2, "select * from test", expected);
+
             s2.Kill();
         }
 
@@ -223,7 +226,7 @@ namespace IntegrationTests
             // s1.Kill();
             System.Threading.Thread.Sleep(100);
             t.Wait();
-
+            s1.Kill();
             var s2 = new TestApServer("cl2", _core);
             var cl2 = new TestClient("cl1", _core);
 

@@ -21,24 +21,27 @@ namespace IntegrationTests
             test1.TestTest();
             test1.TestCreateCommandSynax();
             Console.ReadKey();
-            *//*
+            */
             var test = new MultyThreadTest(true);
-            test.InsertTest();*/
+            test.InsertSelectTest();
             //test.MainTest();
+            /*
             var test2 = new DurabilityTest(true);
             test2.DeleteDurability();
             test2.InsertDurability();
             test2.UpdateDurability();
-            
-            var _core = new DataBase(20, new DataBaseEngineMain(), new TransactionScheduler());
-            using (var binaryData = new MemoryStream())
-            {
-                Serializer.Serialize(binaryData, _core.ExecuteSqlSequence("create table test(i int)"));
-                Console.WriteLine(Serializer.Deserialize <OperationResult<SqlSequenceResult>>(binaryData));
-                binaryData.Flush();
-                Serializer.Serialize(binaryData, _core.ExecuteSqlSequence("insert test values (1),(2)"));
-                Console.WriteLine(Serializer.Deserialize<OperationResult<SqlSequenceResult>>(binaryData));
-            }
+            test2.DeleteDurabilityNoKill();
+            test2.InsertDurabilityNoKill();
+            test2.UpdateDurabilityNoKill();*/
+
+            Console.ReadKey();
+            Console.ReadKey();
+            Console.ReadKey();
+            Console.ReadKey();
+            Console.ReadKey();
+            Console.ReadKey();
+            Console.ReadKey();
+            Console.ReadKey();
         }
     }
 }
